@@ -1,7 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
     <div class="player">
         <!-- Dashboard -->
@@ -17,28 +18,28 @@
             <header>
                 <h4>Now Playing:</h4>
                 <h2>Tên bài hát</h2>
-              </header>      
+            </header>
             <!-- CD -->
             <div class="cd">
-                <div class="cd-thumb" style="background-image: url();"></div>            
-              </div>            
-              <!-- Control-Btn -->
-              <div class="control">
+                <div class="cd-thumb" style="background-image: url();"></div>
+            </div>
+            <!-- Control-Btn -->
+            <div class="control">
                 <div class="btn btn-face">
                     <i class="fa-solid fa-palette"></i>
-                  </div>
-                  <div class="btn btn-repeat">
+                </div>
+                <div class="btn btn-repeat">
                     <i class="fa-solid fa-rotate-right"></i>
                 </div>
                 <div class="btn btn-prev">
-                  <i class="fa-solid fa-backward"></i>
+                    <i class="fa-solid fa-backward"></i>
                 </div>
                 <div class="btn btn-toggle-play">
                     <i class="fa-solid fa-pause icon-pause"></i>
-                    <i class="fa-regular fa-circle-play icon-play"></i>                    
+                    <i class="fa-regular fa-circle-play icon-play"></i>
                 </div>
                 <div class="btn btn-next">
-                  <i class="fa-solid fa-forward"></i>
+                    <i class="fa-solid fa-forward"></i>
                 </div>
                 <div class="btn btn-random">
                     <i class="fa-solid fa-shuffle"></i>
@@ -46,133 +47,155 @@
                 <div class="btn btn-volume">
                     <i class="icon-mute fa-solid fa-volume-xmark"></i>
                     <i class="icon-unmute fa-solid fa-volume-high"></i>
-                    <input type="range" class="volume-bar" value="1" step="0.1" min="0" max="1"/>                    
-                </div>                                   
-            </div>  
-            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">      
+                    <input type="range" class="volume-bar" value="1" step="0.1" min="0" max="1" />
+                </div>
+            </div>
+            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
             <audio id="audio" src=""></audio>
-        </div>      
+        </div>
         <!-- Playlist -->
         <div class="playlist"></div>
     </div>
-    
+
 </body>
+
 </html>
 
 <script>
-  const $ = document.querySelector.bind(document);
-  const $$ = document.querySelectorAll.bind(document);
-const PLAYER_STORAGE_KEY = 'MY_PLAYER';
-const heading = $('header h2');
-const cd = $('.cd');
-const cdThumb = $('.cd-thumb');
-const audio = $('#audio');
-const playBtn = $('.btn-toggle-play');
-const nextBtn = $('.btn-next');
-const prevBtn = $('.btn-prev');
-const rdBtn = $('.btn-random');
-const faceBtn = $('.btn-face');
-const player = $('.player');
-const progres = $('#progress');
-const repeatBtn = $('.btn-repeat');
-const playList = $('.playlist');
-const volBtn = $('.btn-volume');
-const volBar = $('.volume-bar');
-const iconMute = $('.icon-mute');
-const iconUnmute = $('.icon-unmute');
-const bgColor = $('.dashboard');
-const lists = {    
-    currIndex: 0,
-    currVol: 1,
-    lockVol: 1,
-    isPlaying: false,
-    isRandom: false,
-    isRepeat:false,
-    isFace: false, 
-    configs: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
-    //Data-Songs    
-    songs: [
-        {
-          name: "Aloha",
-          singer: "Cool",
-          path: "assets/music/AlohaAloha-Cool_sd5f.mp3",
-          image: "assets/img/aloha_cool.jpg"
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+    const PLAYER_STORAGE_KEY = 'MY_PLAYER';
+    const heading = $('header h2');
+    const cd = $('.cd');
+    const cdThumb = $('.cd-thumb');
+    const audio = $('#audio');
+    const playBtn = $('.btn-toggle-play');
+    const nextBtn = $('.btn-next');
+    const prevBtn = $('.btn-prev');
+    const rdBtn = $('.btn-random');
+    const faceBtn = $('.btn-face');
+    const player = $('.player');
+    const progres = $('#progress');
+    const repeatBtn = $('.btn-repeat');
+    const playList = $('.playlist');
+    const volBtn = $('.btn-volume');
+    const volBar = $('.volume-bar');
+    const iconMute = $('.icon-mute');
+    const iconUnmute = $('.icon-unmute');
+    const bgColor = $('.dashboard');
+    const lists = {
+        currIndex: 0,
+        currVol: 1,
+        lockVol: 1,
+        isPlaying: false,
+        isRandom: false,
+        isRepeat: false,
+        isFace: false,
+        configs: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
+        //Data-Songs    
+        songs: [
+            {
+                name: "Aloha",
+                singer: "Cool",
+                path: "assets/music/AlohaAloha-Cool_sd5f.mp3",
+                image: "assets/img/aloha_cool.jpg"
+            },
+            {
+                name: "Đồi hoa mặt trời",
+                singer: "Hoàng Yến Chibi",
+                path: "assets/music/DoiHoaMatTroi-HoangYenChibi-5140762.mp3",
+                image:
+                    "assets/img/doihoamattroi_hoangyen.jpg"
+            },
+            {
+                name: " Gửi cho anh",
+                singer: "Khởi My",
+                path:
+                    "assets/music/GuiChoAnh-KhoiMy-2572954.mp3",
+                image: "assets/img/guichoanh_khoimy.jpg"
+            },
+            {
+                name: "Hoa hồng đen",
+                singer: "Miu Lê",
+                path: "assets/music/HoaHongDenThemeSongFromChiemDoat-MiuLeHuaKimTuyen-12400805.mp3",
+                image:
+                    "assets/img/hoahongden_miule.jpg"
+            },
+            {
+                name: "Let's not fall in love",
+                singer: "Bigbang",
+                path: "assets/music/LetSNotFallInLove-BIGBANG-6292282.mp3",
+                image:
+                    "assets/img/letnotfallinlove_bigbang.jpg"
+            },
+            {
+                name: " Making my way",
+                singer: "Sơn Tùng MTP",
+                path: "assets/music/MakingMyWayHuyLeeRemix-SonTungMTP-10097976.mp3",
+                image:
+                    "assets/img/makingmyway_MTP.jpg"
+            },
+            {
+                name: " Ngủ một mình",
+                singer: "Hieuthuhai",
+                path: "assets/music/NguMotMinh-HIEUTHUHAINegavKewtiie-8267763.mp3",
+                image:
+                    "assets/img/ngumotminh_hieuthuhai.jpg"
+            },
+            {
+                name: " Tìm lại bầu trời",
+                singer: "Tuấn Hưng",
+                path: "assets/music/TimLaiBauTroi-TuanHung-2504559.mp3",
+                image:
+                    "assets/img/timlaibautroi_tuanhung.jpg"
+            },
+            {
+                name: " Trú mưa",
+                singer: "HKT",
+                path: "assets/music/TruMua-HKTBand_x6jt.mp3",
+                image:
+                    "assets/img/trumua_hkt.jpg"
+            },
+            {
+                name: " Bang Bang Bang",
+                singer: "Bigbang",
+                path: "assets/music/BangBangBang-BIGBANG-6293092.mp3",
+                image:
+                    "assets/img/bangbangbang_bigbang.jpg"
+            },
+            {
+                name: "Dear Love",
+                singer: "Robber Hustlang",
+                path: "assets/music/DearLove-HustlangRobber-8500387.mp3",
+                image:
+                    "assets/img/DearLove_HustlangRobber.jpg"
+            },
+            {
+                name: "Câu chuyện tưởng tượng",
+                singer: "LeVinh",
+                path: "assets/music/CauChuyenTuongTuong-Levinh-7116213.mp3",
+                image:
+                    "assets/img/Cauchuyentuongtuong_LeVinh.jpg"
+            },
+            {
+                name: "Bài hát ca tụng nỗi cô đơn",
+                singer: "Trần Văn Phi",
+                path: "assets/music/BaiHatCaTungNoiCoDon--7204958.mp3",
+                image:
+                    "assets/img/Baihatcatungnoicodon.jpg"
+            },
+
+        ],
+
+        setconfigs: function (key, value) {
+            //Configs
+            this.configs[key] = value;
+            localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.configs));
         },
-        {
-          name: "Đồi hoa mặt trời",
-          singer: "Hoàng Yến Chibi",
-          path: "assets/music/DoiHoaMatTroi-HoangYenChibi-5140762.mp3",
-          image:
-            "assets/img/doihoamattroi_hoangyen.jpg"
-        },
-        {
-          name: " Gửi cho anh",
-          singer: "Khởi My",
-          path:
-            "assets/music/GuiChoAnh-KhoiMy-2572954.mp3",
-          image: "assets/img/guichoanh_khoimy.jpg"
-        },
-        {
-          name: "Hoa hồng đen",
-          singer: "Miu Lê",
-          path: "assets/music/HoaHongDenThemeSongFromChiemDoat-MiuLeHuaKimTuyen-12400805.mp3",
-          image:
-            "assets/img/hoahongden_miule.jpg"
-        },
-        {
-          name: "Let's not fall in love",
-          singer: "Bigbang",
-          path: "assets/music/LetSNotFallInLove-BIGBANG-6292282.mp3",
-          image:
-            "assets/img/letnotfallinlove_bigbang.jpg"
-        },
-        {
-          name: "Lối nhỏ",
-          singer: "Đen Vâu",
-          path:
-            "assets/music/LoiNhoCoverBeat-DongNgocLan-6133413.mp3",
-          image:
-            "assets/img/loinho_denvau.jpg"
-        },
-        {
-          name: " Making my way",
-          singer: "Sơn Tùng MTP",
-          path: "assets/music/MakingMyWayHuyLeeRemix-SonTungMTP-10097976.mp3",
-          image:
-            "assets/img/makingmyway_MTP.jpg"
-        },
-        {
-          name: " Ngủ một mình",
-          singer: "Hieuthuhai",
-          path: "assets/music/NguMotMinh-HIEUTHUHAINegavKewtiie-8267763.mp3",
-          image:
-            "assets/img/ngumotminh_hieuthuhai.jpg"
-        },
-        {
-          name: " Tìm lại bầu trời",
-          singer: "Tuấn Hưng",
-          path: "assets/music/TimLaiBauTroi-TuanHung-2504559.mp3",
-          image:
-            "assets/img/timlaibautroi_tuanhung.jpg"
-        },
-        {
-          name: " Trú mưa",
-          singer: "HKT",
-          path: "assets/music/TruMua-HKTBand_x6jt.mp3",
-          image:
-            "assets/img/trumua_hkt.jpg"
-        }
-      ],
-  
-    setconfigs: function(key, value) {
-        //Configs
-        this.configs[key] = value;
-        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.configs));
-    },
-    render: function() {
-        //Playlist-Render
-        const htmls = this.songs.map((song, index) => {
-            return `
+        render: function () {
+            //Playlist-Render
+            const htmls = this.songs.map((song, index) => {
+                return `
                 <div class="song ${index === this.currIndex ? 'active' : ''}" data-index="${index}">
                     <div class="thumb" style="background-image: url(${song.image});"></div>
                     <div class="body">
@@ -184,246 +207,246 @@ const lists = {
                     </div>
                 </div>
             `
-        });
-        playList.innerHTML = htmls.join('');
-    }, 
-    defineProperties: function() {
-        //Define-CurrSong
-        Object.defineProperty(this, 'currSong', {
-            get: function() {
-                return this.songs[this.currIndex];
-            }
-        })
-    },
-    handleEvents: function() {  
-        const _this = this;  
-        //CD-Efect
-        const cdAnimate = cdThumb.animate([
-            {transform: 'rotate(360deg)'}//Efect-Style
-        ], {
-            duration: 10000,//Time-Rotete
-            iterations: Infinity,//Loop
-        });
-        cdAnimate.pause();
-        //CD-Zoom
-        const cdWidth = cd.offsetWidth;
-        document.onscroll = function() {                    
-            const scrolls = window.scrollY || document.documentElement.scrollTop;                    
-            const newCdWidth = cdWidth - scrolls;
-            cd.style.width = newCdWidth > 0 ? newCdWidth + 'px' : 0;
-            cd.style.opacity = newCdWidth / cdWidth;
-        }
-        //Play-Pause
-        playBtn.onclick = function() {
-            if(_this.isPlaying) {
-                audio.pause();
-            } else {
-                audio.play();
-            }
-        }
-        //Play
-        audio.onplay = function() {
-            _this.isPlaying = true;
-            player.classList.add('playing');
-            cdAnimate.play();
-        }
-        //Pause
-        audio.onpause = function() {
-            _this.isPlaying = false;
-            player.classList.remove('playing');
+            });
+            playList.innerHTML = htmls.join('');
+        },
+        defineProperties: function () {
+            //Define-CurrSong
+            Object.defineProperty(this, 'currSong', {
+                get: function () {
+                    return this.songs[this.currIndex];
+                }
+            })
+        },
+        handleEvents: function () {
+            const _this = this;
+            //CD-Efect
+            const cdAnimate = cdThumb.animate([
+                { transform: 'rotate(360deg)' }//Efect-Style
+            ], {
+                duration: 10000,//Time-Rotete
+                iterations: Infinity,//Loop
+            });
             cdAnimate.pause();
-        }
-        //Time-Playing
-        audio.ontimeupdate = function() {
-            if(audio.duration) {
-                const progresPercent = Math.floor(audio.currentTime / audio.duration * 100);
-                progres.value = progresPercent;
+            //CD-Zoom
+            const cdWidth = cd.offsetWidth;
+            document.onscroll = function () {
+                const scrolls = window.scrollY || document.documentElement.scrollTop;
+                const newCdWidth = cdWidth - scrolls;
+                cd.style.width = newCdWidth > 0 ? newCdWidth + 'px' : 0;
+                cd.style.opacity = newCdWidth / cdWidth;
             }
-        }
-        //Change-Time
-        progres.oninput = function(e) {
-            const seekTime = audio.duration / 100 * e.target.value;
-            audio.currentTime = seekTime;
-        }
-        //Next
-        nextBtn.onclick = function() {
-            if(_this.isRandom) {
-                _this.rdSong();
-            } else {
-                _this.nextSong();
-            }
-            audio.play();            
-            _this.scrollAcriveSong();
-        }
-        //Prev
-        prevBtn.onclick = function() {
-            if(_this.isRandom) {
-                _this.rdSong();
-            } else {
-                _this.prevSong();
-            }
-            audio.play();            
-            _this.scrollAcriveSong();
-        }
-        //Random
-        rdBtn.onclick = function(e) {
-            _this.isRandom = !_this.isRandom;
-            _this.setconfigs('isRandom', _this.isRandom);
-            rdBtn.classList.toggle('active', _this.isRandom);            
-        }
-        //Repeat
-        repeatBtn.onclick = function(e) {
-            _this.isRepeat = !_this.isRepeat;
-            _this.setconfigs('isRepeat', _this.isRepeat);
-            repeatBtn.classList.toggle('active', _this.isRepeat);
-        }
-        //Ended-Audio
-        audio.onended = function() { 
-            if(_this.isRepeat) {
-                audio.play();
-            } else {
-                nextBtn.click();
-            }
-        }        
-        //Playlist-Clicked
-        playList.onclick = function(e) {
-            const activeSong = e.target.closest('.song:not(.active)');
-            const optionSong = e.target.closest('.option');
-            if(activeSong || optionSong) {
-                if(activeSong) {
-                    _this.currIndex = Number(activeSong.dataset.index);
-                    $('.song.active').classList.remove('active');
-                    $$('.song')[_this.currIndex].classList.add('active');
-                    _this.loadCurrSong();
-                    audio.play();                    
+            //Play-Pause
+            playBtn.onclick = function () {
+                if (_this.isPlaying) {
+                    audio.pause();
+                } else {
+                    audio.play();
                 }
             }
-        }
-        //Volume-Bar       
-        volBar.oninput = e => {
-            this.setconfigs("currVol", e.target.value);
-            audio.volume = volBar.value;            
-        }
-        //Check-Volume
-        if(_this.currVol > 0) {
-            volBar.value = _this.currVol;
-            audio.volume = _this.currVol;
-            iconUnmute.style.visibility = 'visible';
-            iconMute.style.visibility = 'hidden';
-        } else {
-            volBar.value = 0
-            audio.volume = 0
-            iconUnmute.style.visibility = 'hidden';
-            iconMute.style.visibility = 'visible';
-        }
-        //Change-Volume
-        audio.onvolumechange = () => {            
-            volBar.value = audio.volume
-            if(audio.volume === 0) {
-                iconMute.style.visibility = 'visible';
-                iconUnmute.style.visibility = 'hidden';
-            } else {
-                iconMute.style.visibility = 'hidden';
+            //Play
+            audio.onplay = function () {
+                _this.isPlaying = true;
+                player.classList.add('playing');
+                cdAnimate.play();
+            }
+            //Pause
+            audio.onpause = function () {
+                _this.isPlaying = false;
+                player.classList.remove('playing');
+                cdAnimate.pause();
+            }
+            //Time-Playing
+            audio.ontimeupdate = function () {
+                if (audio.duration) {
+                    const progresPercent = Math.floor(audio.currentTime / audio.duration * 100);
+                    progres.value = progresPercent;
+                }
+            }
+            //Change-Time
+            progres.oninput = function (e) {
+                const seekTime = audio.duration / 100 * e.target.value;
+                audio.currentTime = seekTime;
+            }
+            //Next
+            nextBtn.onclick = function () {
+                if (_this.isRandom) {
+                    _this.rdSong();
+                } else {
+                    _this.nextSong();
+                }
+                audio.play();
+                _this.scrollAcriveSong();
+            }
+            //Prev
+            prevBtn.onclick = function () {
+                if (_this.isRandom) {
+                    _this.rdSong();
+                } else {
+                    _this.prevSong();
+                }
+                audio.play();
+                _this.scrollAcriveSong();
+            }
+            //Random
+            rdBtn.onclick = function (e) {
+                _this.isRandom = !_this.isRandom;
+                _this.setconfigs('isRandom', _this.isRandom);
+                rdBtn.classList.toggle('active', _this.isRandom);
+            }
+            //Repeat
+            repeatBtn.onclick = function (e) {
+                _this.isRepeat = !_this.isRepeat;
+                _this.setconfigs('isRepeat', _this.isRepeat);
+                repeatBtn.classList.toggle('active', _this.isRepeat);
+            }
+            //Ended-Audio
+            audio.onended = function () {
+                if (_this.isRepeat) {
+                    audio.play();
+                } else {
+                    nextBtn.click();
+                }
+            }
+            //Playlist-Clicked
+            playList.onclick = function (e) {
+                const activeSong = e.target.closest('.song:not(.active)');
+                const optionSong = e.target.closest('.option');
+                if (activeSong || optionSong) {
+                    if (activeSong) {
+                        _this.currIndex = Number(activeSong.dataset.index);
+                        $('.song.active').classList.remove('active');
+                        $$('.song')[_this.currIndex].classList.add('active');
+                        _this.loadCurrSong();
+                        audio.play();
+                    }
+                }
+            }
+            //Volume-Bar       
+            volBar.oninput = e => {
+                this.setconfigs("currVol", e.target.value);
+                audio.volume = volBar.value;
+            }
+            //Check-Volume
+            if (_this.currVol > 0) {
+                volBar.value = _this.currVol;
+                audio.volume = _this.currVol;
                 iconUnmute.style.visibility = 'visible';
-            }
-        }
-        //Unmute-Volume
-        iconUnmute.onclick = (e) => {
-            this.setconfigs("lockVol", audio.volume);
-            audio.volume = 0;
-            this.setconfigs("currVol", audio.volume);
-        }
-        //Mute-Volume
-        iconMute.onclick = (e) => {
-            audio.volume = this.configs.lockVol;
-            this.setconfigs("currVol", audio.volume);
-        }
-        //Background-Thame        
-        faceBtn.onclick = function() {
-            const songs = $$('.song');
-            this.isFace = !this.isFace;            
-            if(this.isFace) {
-                bgColor.classList.add('bg'); 
-                heading.style.color = 'white';                
-                songs.forEach(function(song) {
-                    songs.forEach(function(item) {
-                        item.classList.add('bg');                        
-                    });
-                    song.querySelector('h3').style.color = 'rgba(255, 255, 255, 0.7)';
-                });
+                iconMute.style.visibility = 'hidden';
             } else {
-                bgColor.classList.remove('bg');
-                heading.style.color = '';
-                songs.forEach(function(song) {
-                    songs.forEach(function(item) {
-                        item.classList.remove('bg');
-                    });
-                    song.querySelector('h3').style.color = '';
-                });
+                volBar.value = 0
+                audio.volume = 0
+                iconUnmute.style.visibility = 'hidden';
+                iconMute.style.visibility = 'visible';
             }
-            faceBtn.classList.toggle('active', this.isFace);
+            //Change-Volume
+            audio.onvolumechange = () => {
+                volBar.value = audio.volume
+                if (audio.volume === 0) {
+                    iconMute.style.visibility = 'visible';
+                    iconUnmute.style.visibility = 'hidden';
+                } else {
+                    iconMute.style.visibility = 'hidden';
+                    iconUnmute.style.visibility = 'visible';
+                }
+            }
+            //Unmute-Volume
+            iconUnmute.onclick = (e) => {
+                this.setconfigs("lockVol", audio.volume);
+                audio.volume = 0;
+                this.setconfigs("currVol", audio.volume);
+            }
+            //Mute-Volume
+            iconMute.onclick = (e) => {
+                audio.volume = this.configs.lockVol;
+                this.setconfigs("currVol", audio.volume);
+            }
+            //Background-Thame        
+            faceBtn.onclick = function () {
+                const songs = $$('.song');
+                this.isFace = !this.isFace;
+                if (this.isFace) {
+                    bgColor.classList.add('bg');
+                    heading.style.color = 'white';
+                    songs.forEach(function (song) {
+                        songs.forEach(function (item) {
+                            item.classList.add('bg');
+                        });
+                        song.querySelector('h3').style.color = 'rgba(255, 255, 255, 0.7)';
+                    });
+                } else {
+                    bgColor.classList.remove('bg');
+                    heading.style.color = '';
+                    songs.forEach(function (song) {
+                        songs.forEach(function (item) {
+                            item.classList.remove('bg');
+                        });
+                        song.querySelector('h3').style.color = '';
+                    });
+                }
+                faceBtn.classList.toggle('active', this.isFace);
+            }
+        },
+        loadCurrSong: function () {
+            heading.textContent = this.currSong.name;
+            cdThumb.style.backgroundImage = `url('${this.currSong.image}')`;
+            audio.src = this.currSong.path;
+        },
+        nextSong: function () {
+            this.currIndex++;
+            if (this.currIndex >= this.songs.length) {
+                this.currIndex = 0;
+            }
+            //Active-Song
+            $('.song.active').classList.remove('active');
+            $$('.song')[this.currIndex].classList.add('active');
+            this.loadCurrSong();
+        },
+        prevSong: function () {
+            this.currIndex--;
+            if (this.currIndex < 0) {
+                this.currIndex = this.songs.length - 1;
+            }
+            //Active-Song
+            $('.song.active').classList.remove('active');
+            $$('.song')[this.currIndex].classList.add('active');
+            this.loadCurrSong();
+        },
+        rdSong: function () {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * this.songs.length);
+            } while (newIndex === this.currIndex);
+            this.currIndex = newIndex;
+            //Active-Song
+            $('.song.active').classList.remove('active');
+            $$('.song')[this.currIndex].classList.add('active');
+            this.loadCurrSong();
+        },
+        scrollAcriveSong: function () {
+            //Scroll-Frist/Last-Playlist
+            setTimeout(() => {
+                $('.song.active').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end'
+                })
+            }, 300)
+        },
+        loadConfig: function () {
+            //load-configs
+            this.isRandom = this.configs.isRandom;
+            this.isRepeat = this.configs.isRepeat;
+        },
+        start: function () {
+            this.loadConfig();//Load Config to Obj
+            this.defineProperties();//Define Attr for Obj
+            this.handleEvents();//Listen or Handle DOM Events
+            this.loadCurrSong();//Upload Info First Song to UI
+            this.render();//Render Playlist
+            rdBtn.classList.toggle('active', this.isRandom);
+            repeatBtn.classList.toggle('active', this.isRepeat);
         }
-    },
-    loadCurrSong: function() {
-        heading.textContent = this.currSong.name;
-        cdThumb.style.backgroundImage = `url('${this.currSong.image}')`;
-        audio.src = this.currSong.path;
-    },    
-    nextSong: function() {
-        this.currIndex++;
-        if(this.currIndex >= this.songs.length) {
-            this.currIndex = 0;
-        }
-        //Active-Song
-        $('.song.active').classList.remove('active');
-        $$('.song')[this.currIndex].classList.add('active');
-        this.loadCurrSong();
-    },
-    prevSong: function() {
-        this.currIndex--;
-        if(this.currIndex < 0) {
-            this.currIndex = this.songs.length - 1;
-        }
-        //Active-Song
-        $('.song.active').classList.remove('active');
-        $$('.song')[this.currIndex].classList.add('active');
-        this.loadCurrSong();
-    },
-    rdSong: function() {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * this.songs.length);
-        } while (newIndex === this.currIndex);
-        this.currIndex = newIndex;
-        //Active-Song
-        $('.song.active').classList.remove('active');
-        $$('.song')[this.currIndex].classList.add('active');
-        this.loadCurrSong();
-    },
-    scrollAcriveSong: function() {
-        //Scroll-Frist/Last-Playlist
-        setTimeout(() => {
-            $('.song.active').scrollIntoView({
-                behavior: 'smooth',
-                block: 'end'
-            })
-        }, 300)
-    },
-    loadConfig: function() {
-        //load-configs
-        this.isRandom = this.configs.isRandom;
-        this.isRepeat = this.configs.isRepeat;             
-    },
-    start: function() {
-        this.loadConfig();//Load Config to Obj
-        this.defineProperties();//Define Attr for Obj
-        this.handleEvents();//Listen or Handle DOM Events
-        this.loadCurrSong();//Upload Info First Song to UI
-        this.render();//Render Playlist
-        rdBtn.classList.toggle('active', this.isRandom);
-        repeatBtn.classList.toggle('active', this.isRepeat);         
     }
-}
-lists.start();
+    lists.start();
 
 </script>
